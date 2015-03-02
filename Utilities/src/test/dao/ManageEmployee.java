@@ -1,12 +1,17 @@
+package test.dao;
 import java.util.List; 
 import java.util.Date;
 import java.util.Iterator; 
- 
+
 import org.hibernate.HibernateException; 
 import org.hibernate.Session; 
 import org.hibernate.Transaction;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+
+import test.model.Address;
+import test.model.Employee;
+import test.model.Vehicle;
 
 public class ManageEmployee {
    private static SessionFactory factory; 
@@ -44,7 +49,21 @@ public class ManageEmployee {
       try{
          tx = session.beginTransaction();
          Employee employee = new Employee(fname, lname, salary);
+         
+         
+         Address addr1 = new Address(fname + "1-street", "1-city", "1-state", "1-zipcode");
+         Address addr2 = new Address(fname + "2-street", "2-city", "2-state", "2-zipcode");
+         Address addr3 = new Address(fname + "3-street", "3-city", "3-state", "3-zipcode");
+         employee.setHomeaddress(addr3);
+         employee.getListOfOfficeaddress().add(addr2);
+         employee.getListOfOfficeaddress().add(addr1);
+         
+         Vehicle veh_1 = new Vehicle("Fiat");
+         employee.setVehicle(veh_1);
+         
          employeeID = (Integer) session.save(employee); 
+         session.save(veh_1); 
+         
          tx.commit();
       }catch (HibernateException e) {
          if (tx!=null) tx.rollback();
@@ -111,4 +130,20 @@ public class ManageEmployee {
          session.close(); 
       }
    }
+   
+   /* Method to CREATE an adresss in the database */
+   public Address createAddress(String street, String city, String state, String zipcode){
+	 
+	  Address addr = new Address(street, city, state, zipcode);
+      return addr;
+   }
+   
+   /* Method to CREATE an adresss in the database */
+   public Vehicle createVehicle(String carName){
+	 
+	  Vehicle addr = new Vehicle(carName);
+      return addr;
+   }
+   
+   
 }

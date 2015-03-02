@@ -21,9 +21,15 @@
   <!--  <property name="hibernate.connection.password">
       root123
    </property>  -->
+   <property name="show_sql">true</property>
+   <property name="hbm2ddl.auto">create</property>
 
    <!-- List of XML mapping files -->
+   <!--   
    <mapping resource="Employee.hbm.xml"/>
+   -->
+   <mapping class="test.model.Employee"/>
+   <mapping class="test.model.Vehicle"/>
 
 </session-factory>
 </hibernate-configuration>
