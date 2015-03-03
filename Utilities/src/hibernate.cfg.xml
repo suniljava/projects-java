@@ -30,6 +30,13 @@
    -->
    <mapping class="test.model.Employee"/>
    <mapping class="test.model.Vehicle"/>
+   <mapping class="test.model.Qualification"/>
+   <mapping class="test.model.Job"/>
+   <mapping class="test.model.Locations"/>
+   <mapping class="test.model.FourWheeler"/>
+   <mapping class="test.model.TwoWheeler"/>
+   <mapping class="test.model.TestUser"/>
+   
 
 </session-factory>
 </hibernate-configuration>

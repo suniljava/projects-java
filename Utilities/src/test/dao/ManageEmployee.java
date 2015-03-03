@@ -11,6 +11,8 @@ import org.hibernate.cfg.Configuration;
 
 import test.model.Address;
 import test.model.Employee;
+import test.model.FourWheeler;
+import test.model.TwoWheeler;
 import test.model.Vehicle;
 
 public class ManageEmployee {
@@ -23,24 +25,27 @@ public class ManageEmployee {
          throw new ExceptionInInitializerError(ex); 
       }
       ManageEmployee ME = new ManageEmployee();
+      
 
-      /* Add few employee records in database */
+      ME.addVehicle();
+
+      /* Add few employee records in database 
       Integer empID1 = ME.addEmployee("Zara", "Ali", 1000);
       Integer empID2 = ME.addEmployee("Daisy", "Das", 5000);
       Integer empID3 = ME.addEmployee("John", "Paul", 10000);
 
-      /* List down all the employees */
+       List down all the employees 
       ME.listEmployees();
 
-      /* Update employee's records */
+       Update employee's records 
       ME.updateEmployee(empID1, 5000);
 
-      /* Delete an employee from the database */
+       Delete an employee from the database 
       ME.deleteEmployee(empID2);
 
-      /* List down new list of the employees */
+       List down new list of the employees 
       ME.listEmployees();
-   }
+*/   }
    /* Method to CREATE an employee in the database */
    public Integer addEmployee(String fname, String lname, int salary){
       Session session = factory.openSession();
@@ -59,10 +64,10 @@ public class ManageEmployee {
          employee.getListOfOfficeaddress().add(addr1);
          
          Vehicle veh_1 = new Vehicle("Fiat");
-         employee.setVehicle(veh_1);
-         
+         //employee.setVehicle(veh_1);
+         session.save(veh_1);
          employeeID = (Integer) session.save(employee); 
-         session.save(veh_1); 
+          
          
          tx.commit();
       }catch (HibernateException e) {
@@ -144,6 +149,35 @@ public class ManageEmployee {
 	  Vehicle addr = new Vehicle(carName);
       return addr;
    }
+   
+   public void addVehicle(){
+	      Session session = factory.openSession();
+	      Transaction tx = null;
+	      
+	      try{
+	         tx = session.beginTransaction();
+	         Vehicle veh_1 = new Vehicle("vehicle");
+	         TwoWheeler veh_2 = new TwoWheeler();
+	         FourWheeler veh_3 = new FourWheeler();
+	         veh_2.setVehicle("Luna");
+	         veh_2.setSteeringHandle("Luna Handle");
+	         
+	         veh_3.setVehicle("Porshe");
+	         veh_3.setSteeringWheel("Porshe Wheel");
+	         
+	         session.save(veh_1);
+	         session.save(veh_2);
+	         session.save(veh_3);
+	         
+	         tx.commit();
+	      }catch (HibernateException e) {
+	         if (tx!=null) tx.rollback();
+	         e.printStackTrace(); 
+	      }finally {
+	         session.close(); 
+	      }
+	      
+	   }
    
    
 }
