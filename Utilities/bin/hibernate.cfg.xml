@@ -3,40 +3,49 @@
 "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 
 <hibernate-configuration>
-   <session-factory>
-   <property name="hibernate.dialect">
-      org.hibernate.dialect.PostgreSQLDialect
-   </property>
-   <property name="hibernate.connection.driver_class">
-      org.postgresql.Driver
-   </property>
+	<session-factory>
+		<property name="hibernate.dialect">
+			org.hibernate.dialect.PostgreSQLDialect
+		</property>
+		<property name="hibernate.connection.driver_class">
+			org.postgresql.Driver
+		</property>
 
-   <!-- Assume test is the database name -->
-   <property name="hibernate.connection.url">
-      jdbc:postgresql://localhost:5432/javatest
-   </property>
-   <property name="hibernate.connection.username">
-      skambli
-   </property>
-  <!--  <property name="hibernate.connection.password">
-      root123
-   </property>  -->
-   <property name="show_sql">true</property>
-   <property name="hbm2ddl.auto">create</property>
+		<!-- Assume test is the database name -->
+		<property name="hibernate.connection.url">
+			jdbc:postgresql://localhost:5432/javatest
+		</property>
+		<property name="hibernate.connection.username">
+			skambli
+		</property>
+		<!-- <property name="hibernate.connection.password"> root123 </property> -->
 
-   <!-- List of XML mapping files -->
-   <!--   
-   <mapping resource="Employee.hbm.xml"/>
-   -->
-   <mapping class="test.model.Employee"/>
-   <mapping class="test.model.Vehicle"/>
-   <mapping class="test.model.Qualification"/>
-   <mapping class="test.model.Job"/>
-   <mapping class="test.model.Locations"/>
-   <mapping class="test.model.FourWheeler"/>
-   <mapping class="test.model.TwoWheeler"/>
-   <mapping class="test.model.TestUser"/>
-   
+		<!-- Enable Hibernate's automatic session context management -->
+		<property name="cache.use_second_level_cache">true</property>
+		<property name="hibernate.cache.use_query_cache">true</property> 
 
-</session-factory>
+		<property name="hibernate.cache.provider_class">
+			org.hibernate.cache.EhCacheProvider
+		</property>
+
+		<property name="hibernate.cache.region.factory_class">org.hibernate.cache.EhCacheRegionFactory</property> 
+
+
+
+		<property name="show_sql">true</property>
+		<property name="hbm2ddl.auto">update</property>
+
+		<!-- List of XML mapping files -->
+		<!-- <mapping resource="Employee.hbm.xml"/> -->
+		<mapping class="test.model.Employee" />
+		<mapping class="test.model.Vehicle" />
+		<mapping class="test.model.Qualification" />
+		<mapping class="test.model.Job" />
+		<mapping class="test.model.Locations" />
+		<mapping class="test.model.FourWheeler" />
+		<mapping class="test.model.TwoWheeler" />
+		<mapping class="test.model.TestUser" />
+
+
+	</session-factory>
 </hibernate-configuration>
