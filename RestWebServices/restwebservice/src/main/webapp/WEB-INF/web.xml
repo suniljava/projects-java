@@ -18,4 +18,14 @@
     <servlet-name>RESTful Jersey Hello World Service</servlet-name>
     <url-pattern>/rest/*</url-pattern>
   </servlet-mapping>
+  
+  <filter>
+    <filter-name>AuthenticationFilter</filter-name>
+    <filter-class>rest.authenticate.filter.AuthenticateFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>AuthenticationFilter</filter-name>
+    <url-pattern>/rest/*</url-pattern>
+  </filter-mapping>
+  
 </web-app>
